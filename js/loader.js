@@ -1,7 +1,7 @@
 import { label, onLangChange } from './i18n.js';
 import * as engine from './engine.js';
 import { detectGpu, MODELS } from './models.js';
-import { runLock, setModelReady } from './state.js';
+import { runLock, setModelReady, setGpuOk, onModelChange } from './state.js';
 import { el } from './ui.js';
 
 const STORAGE_KEY = 'llm-basics-model';
@@ -75,6 +75,13 @@ export async function mountLoader(mount) {
 
   const gpu = await detectGpu(navigator);
   gpuOk = gpu.ok;
+  setGpuOk(gpu.ok);
+  onModelChange((ready) => {
+    if (ready || loading) return;
+    setPill('none', 'pill.none');
+    label(loadBtn, 'start.load');
+    refresh();
+  });
   label(gpuLine, gpu.ok ? 'gpu.ok' : 'gpu.none');
   gpuLine.classList.toggle('bad', !gpu.ok);
   refresh();

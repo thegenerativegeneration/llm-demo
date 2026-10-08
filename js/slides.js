@@ -1,5 +1,6 @@
 import { slideFromHash, clamp } from './slideNav.js';
 import { onLangChange, tf } from './i18n.js';
+import { stopActiveRun } from './state.js';
 
 const TYPING = new Set(['INPUT', 'TEXTAREA', 'SELECT']);
 
@@ -26,6 +27,7 @@ export function initSlides() {
 
   function show(n, focus) {
     if (n === current) return;
+    if (current !== -1) stopActiveRun();
     current = n;
     slides.forEach((s, i) => (s.hidden = i !== n));
     dots.forEach((b, i) => b.setAttribute('aria-current', i === n ? 'step' : 'false'));

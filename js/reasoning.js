@@ -22,11 +22,11 @@ export function mountReasoning(mount) {
 
   run.addEventListener('click', () =>
     runExclusive(
-      async () => {
+      async (run) => {
         outs.forEach((o) => o.replaceChildren());
         const messages = [{ role: 'user', content: prompt.area.value }];
         const direct = await streamInto(outs[0], { messages, thinking: false });
-        if (!direct || direct.finishReason === 'abort') return;
+        if (!direct || run.stopped) return;
         await streamInto(outs[1], { messages, thinking: true });
       },
       stopBtn,

@@ -1,6 +1,7 @@
 import { splitThinking } from './thinking.js';
 import { label } from './i18n.js';
 import { parseBold } from './markdown.js';
+import { describeRunError } from './state.js';
 
 function el(tag, className) {
   const node = document.createElement(tag);
@@ -70,10 +71,12 @@ export function createOutputView(container, { thinking }) {
     answer.classList.remove('pulse');
     summary.classList.remove('pulse');
     if (thinking && !last.thoughts) details.hidden = true;
+    if (thinking && last.thinkingOpen) label(summary, 'out.thoughtsUnfinished');
     status.classList.remove('warn');
     if (error) {
+      const { key, vars } = describeRunError(error);
       status.classList.add('warn');
-      label(status, 'out.error', { msg: error.message || String(error) });
+      label(status, key, vars);
       return;
     }
     if (finishReason === 'abort') {

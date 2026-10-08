@@ -1,6 +1,6 @@
 import { label } from './i18n.js';
 import * as engine from './engine.js';
-import { runExclusive } from './state.js';
+import { runExclusive, describeRunError } from './state.js';
 import { el, promptField, temperatureSlider, runControls } from './ui.js';
 
 /** Shows the user's text plainly and the model's continuation highlighted. */
@@ -17,7 +17,10 @@ function continuationView(container, given) {
     update: (text) => (gen.textContent = text),
     finish({ finishReason, tokens, error }) {
       gen.classList.remove('pulse');
-      if (error) label(status, 'out.error', { msg: error.message || String(error) });
+      if (error) {
+        const { key, vars } = describeRunError(error);
+        label(status, key, vars);
+      }
       else if (finishReason === 'abort') label(status, 'out.stopped');
       else label(status, 'out.tokens', { n: tokens });
     },
@@ -61,7 +64,7 @@ export function mountRandomness(mount) {
 
   run.addEventListener('click', () =>
     runExclusive(
-      async () => {
+      async (run) => {
         const slots = [0, 1, 2].map(() => el('div', 'card'));
         cards.replaceChildren(...slots);
         for (const slot of slots) {
@@ -70,7 +73,7 @@ export function mountRandomness(mount) {
             { prompt: prompt.area.value, temperature: Number(temp.input.value), maxTokens: 12 },
             false,
           );
-          if (!result || result.finishReason === 'abort') break;
+          if (!result || run.stopped) break;
         }
       },
       stopBtn,

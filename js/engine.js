@@ -24,6 +24,10 @@ export async function load(nextSize, onProgress) {
 
 export const isReady = () => engine !== null && size !== null;
 export const currentSize = () => size;
+/** WebLLM unloads the model on GPU device loss; reflect that here. */
+export const markLost = () => {
+  size = null;
+};
 
 async function collect(chunks, pick, onText) {
   let text = '';

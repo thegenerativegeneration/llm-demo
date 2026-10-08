@@ -1,7 +1,7 @@
 import { label, t } from './i18n.js';
 import * as engine from './engine.js';
-import { runExclusive, bindRunControls, runLock } from './state.js';
-import { displayToken, toPercent } from './tokenFormat.js';
+import { runExclusive, bindRunControls, runLock, describeRunError } from './state.js';
+import { displayToken, toPercent, isBrokenToken } from './tokenFormat.js';
 import { el, promptField } from './ui.js';
 
 function sample(candidates) {
@@ -69,7 +69,14 @@ export function mountTokens(mount) {
         const pct = el('span', 'pct');
         pct.textContent = toPercent(c.prob);
         b.append(tok, bar, pct);
-        b.addEventListener('click', () => choose(c));
+        if (isBrokenToken(c.token)) {
+          // half of a multi-byte character: appending it would corrupt the text
+          b.disabled = true;
+          b.dataset.i18nTitle = 'tokens.broken';
+          b.title = t('tokens.broken');
+        } else {
+          b.addEventListener('click', () => choose(c));
+        }
         return b;
       }),
       otherRow(),
@@ -85,7 +92,8 @@ export function mountTokens(mount) {
           candidates = await engine.nextTokens(prompt.area.value, 5);
           render();
         } catch (error) {
-          label(status, 'out.error', { msg: error.message || String(error) });
+          const { key, vars } = describeRunError(error);
+          label(status, key, vars);
         }
       },
       stopBtn,
@@ -102,7 +110,8 @@ export function mountTokens(mount) {
   show.addEventListener('click', fetchNext);
   auto.addEventListener('click', async () => {
     if (!candidates.length) await fetchNext();
-    if (candidates.length) choose(sample(candidates));
+    const usable = candidates.filter((c) => !isBrokenToken(c.token));
+    if (usable.length) choose(sample(usable));
   });
   reset.addEventListener('click', () => {
     prompt.area.dataset.i18nPrompt = 'tokens.start';

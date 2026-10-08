@@ -124,10 +124,13 @@ export function mountChatBox(mount, opts) {
     delete prompt.area.dataset.i18nPrompt;
     model.b.scrollIntoView({ block: 'nearest' });
     const result = await streamInto(model.body, { messages, ...settings() });
-    if (result) {
-      // earlier thoughts are not sent back, as Qwen3's chat template expects
-      turns.push({ role: 'user', content: input }, { role: 'assistant', content: splitThinking(result.text).answer });
+    // earlier thoughts are not sent back, as Qwen3's chat template expects
+    const answer = result ? splitThinking(result.text).answer : '';
+    if (answer) {
+      turns.push({ role: 'user', content: input }, { role: 'assistant', content: answer });
       label(reread, 'chat.reread', { n: turns.length });
+    } else if (!prompt.area.value) {
+      prompt.area.value = input;
     }
   }
 

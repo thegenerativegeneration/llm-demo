@@ -248,6 +248,8 @@ progress { width: 100%; height: 0.6rem; accent-color: var(--accent); margin-top:
 .cand:hover:not(:disabled) { border-color: var(--ink); }
 .cand .bar { height: 0.7rem; background: var(--bar); border-radius: 2px; }
 .cand .bar i { display: block; height: 100%; background: var(--accent); border-radius: 2px; }
+.cand .tok { white-space: pre; }
+.cand:disabled { cursor: not-allowed; opacity: 0.55; }
 .cand.other { cursor: default; border-style: dashed; color: var(--muted); }
 .cand.other .bar i { background: var(--muted); }
 .cand .pct { text-align: right; font-size: 0.9rem; color: var(--muted); }

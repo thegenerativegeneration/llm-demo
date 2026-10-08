@@ -23,7 +23,7 @@ export default {
   'gpu.none':
     'Dein Browser kann das Modell nicht ausführen (WebGPU fehlt). Öffne die Seite bitte in Chrome oder Edge auf einem Laptop. Lesen kannst du trotzdem alles.',
   'load.loading': 'Wird geladen…',
-  'load.ready': 'Modell bereit: {name}. Scroll nach unten und probier es aus.',
+  'load.ready': 'Modell bereit: {name}. Klick auf «Weiter» und probier es aus.',
   'err.no-webgpu': 'Dieser Browser hat kein WebGPU. Bitte Chrome oder Edge verwenden.',
   'err.no-adapter': 'Kein nutzbarer Grafikchip gefunden. Versuch es mit Chrome oder Edge oder einem anderen Computer.',
   'err.memory': 'Zu wenig Grafikspeicher. Schliess andere Tabs oder wähle das kleine Modell.',
@@ -35,7 +35,7 @@ export default {
   'box.thinkHint': 'Das Modell schreibt sich vor der Antwort Notizen.',
   'box.prompt': 'Prompt',
   'box.output': 'Antwort',
-  'box.needModel': 'Zuerst das Modell laden (oben auf der Seite).',
+  'box.needModel': 'Zuerst das Modell laden (Folie 0).',
   'box.busy': 'Warte, bis die aktuelle Antwort fertig ist.',
   'out.thinking': 'Denkt nach…',
   'out.thoughtFor': '{s} s nachgedacht',
@@ -170,4 +170,9 @@ export default {
   'pill.none': 'Kein Modell geladen',
   'pill.loading': 'Modell lädt…',
   'pill.ready': '{name} bereit',
+  'box.noGpu': 'Dieser Browser kann das Modell nicht ausführen. Bitte Chrome oder Edge verwenden.',
+  'err.lost': 'Das Modell funktioniert nicht mehr, vermutlich zu wenig Grafikspeicher. Lade es auf Folie 0 neu; das kleine Modell braucht weniger.',
+  'err.context': 'Das Gespräch ist zu lang für das Modell. Drück «Alles vergessen» und fang neu an.',
+  'out.thoughtsUnfinished': 'Gedanken (unvollständig)',
+  'tokens.broken': 'Nur ein Teil eines Zeichens (z. B. ein halber Umlaut). Allein kann man es nicht wählen.',
 };

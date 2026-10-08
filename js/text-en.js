@@ -24,7 +24,7 @@ export default {
   'gpu.none':
     'Your browser cannot run the model (WebGPU is missing). Please open this page in Chrome or Edge on a laptop. You can still read everything.',
   'load.loading': 'Loading…',
-  'load.ready': 'Model ready: {name}. Scroll down and try it.',
+  'load.ready': 'Model ready: {name}. Click “Next” to try it.',
   'err.no-webgpu': 'This browser has no WebGPU. Please use Chrome or Edge.',
   'err.no-adapter': 'No usable graphics chip was found. Try Chrome or Edge, or another computer.',
   'err.memory': 'Not enough graphics memory. Close other tabs or choose the small model.',
@@ -37,7 +37,7 @@ export default {
   'box.thinkHint': 'The model writes notes to itself before answering.',
   'box.prompt': 'Prompt',
   'box.output': 'Answer',
-  'box.needModel': 'Load the model first (top of the page).',
+  'box.needModel': 'Load the model first (slide 0).',
   'box.busy': 'Wait until the current answer is finished.',
   'out.thinking': 'Thinking…',
   'out.thoughtFor': 'Thought for {s} s',
@@ -181,4 +181,9 @@ export default {
   'pill.none': 'No model loaded',
   'pill.loading': 'Loading model…',
   'pill.ready': '{name} ready',
+  'box.noGpu': 'This browser cannot run the model. Please use Chrome or Edge.',
+  'err.lost': 'The model stopped working, probably not enough graphics memory. Load it again on slide 0; the small model needs less.',
+  'err.context': 'The conversation is too long for the model. Press “Forget everything” and start again.',
+  'out.thoughtsUnfinished': 'Thoughts (unfinished)',
+  'tokens.broken': 'Only part of a character (e.g. half an umlaut). It cannot be chosen on its own.',
 };
