@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How a language model writes</title>
+    <meta name="description" content="A hands-on introduction to prompting and reasoning with a small language model that runs in your browser." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23c8401a'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='Georgia'%3EAa%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="masthead-bar">
+        <a class="byline" href="https://philipphaslbauer.com" data-i18n="head.by">by Philipp Haslbauer</a>
+        <div class="lang" role="group" aria-label="Language / Sprache">
+          <button type="button" data-lang="de">DE</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+      </div>
+      <p class="kicker" data-i18n="head.kicker"></p>
+      <h1 data-i18n="head.title">How a language model writes</h1>
+      <p class="lead" data-i18n="head.lead"></p>
+    </header>
+
+    <main>
+      <section class="step" id="start">
+        <h2><span class="num">0</span><span data-i18n="start.h"></span></h2>
+        <p data-i18n="start.p1"></p>
+        <p data-i18n="start.p2"></p>
+        <div id="loader"></div>
+      </section>
+
+      <section class="step" id="prompt">
+        <h2><span class="num">1</span><span data-i18n="prompt.h"></span></h2>
+        <p data-i18n-html="prompt.p1"></p>
+        <p data-i18n="prompt.p2"></p>
+        <p class="try" data-i18n="prompt.try"></p>
+        <div class="pair">
+          <div data-box="vague"></div>
+          <div data-box="specific"></div>
+        </div>
+      </section>
+
+      <section class="step" id="role">
+        <h2><span class="num">2</span><span data-i18n="role.h"></span></h2>
+        <p data-i18n-html="role.p1"></p>
+        <p class="try" data-i18n="role.try"></p>
+        <div data-box="role"></div>
+      </section>
+
+      <section class="step" id="fewshot">
+        <h2><span class="num">3</span><span data-i18n="fewshot.h"></span></h2>
+        <p data-i18n-html="fewshot.p1"></p>
+        <p class="try" data-i18n="fewshot.try"></p>
+        <div data-box="fewshot"></div>
+      </section>
+
+      <section class="step" id="randomness">
+        <h2><span class="num">4</span><span data-i18n="rand.h"></span></h2>
+        <p data-i18n-html="rand.p1"></p>
+        <p class="try" data-i18n="rand.try"></p>
+        <div id="rand-box"></div>
+      </section>
+
+      <section class="step" id="tokens">
+        <h2><span class="num">5</span><span data-i18n="tokens.h"></span></h2>
+        <p data-i18n-html="tokens.p1"></p>
+        <p class="try" data-i18n="tokens.try"></p>
+        <div id="tokens-box"></div>
+      </section>
+
+      <section class="step" id="reasoning">
+        <h2><span class="num">6</span><span data-i18n="reason.h"></span></h2>
+        <p data-i18n="reason.p1"></p>
+        <p data-i18n="reason.p2"></p>
+        <p class="try" data-i18n="reason.try"></p>
+        <div id="reason-box"></div>
+      </section>
+
+      <section class="step" id="failures">
+        <h2><span class="num">7</span><span data-i18n="fail.h"></span></h2>
+        <p data-i18n="fail.p1"></p>
+        <article class="fail">
+          <h3 data-i18n="fail.countH"></h3>
+          <p class="note" data-i18n="fail.countNote"></p>
+          <div data-box="fail.count"></div>
+        </article>
+        <article class="fail">
+          <h3 data-i18n="fail.bioH"></h3>
+          <p class="note" data-i18n="fail.bioNote"></p>
+          <div data-box="fail.bio"></div>
+        </article>
+        <article class="fail">
+          <h3 data-i18n="fail.sourcesH"></h3>
+          <p class="note" data-i18n="fail.sourcesNote"></p>
+          <div data-box="fail.sources"></div>
+        </article>
+        <article class="fail">
+          <h3 data-i18n="fail.dateH"></h3>
+          <p class="note" data-i18n="fail.dateNote"></p>
+          <div data-box="fail.date"></div>
+        </article>
+      </section>
+
+      <section class="step takeaways" id="end">
+        <h2 data-i18n="end.h"></h2>
+        <ol>
+          <li data-i18n="end.1"></li>
+          <li data-i18n="end.2"></li>
+          <li data-i18n="end.3"></li>
+          <li data-i18n="end.4"></li>
+          <li data-i18n="end.5"></li>
+        </ol>
+      </section>
+    </main>
+
+    <footer data-i18n-html="foot"></footer>
+
+    <noscript><p class="noscript">This page needs JavaScript. / Diese Seite braucht JavaScript.</p></noscript>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

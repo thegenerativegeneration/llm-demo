@@ -1,0 +1,140 @@
+export default {
+  'meta.title': 'Wie ein Sprachmodell schreibt',
+  'head.kicker': 'Eine Einführung zum Ausprobieren',
+  'head.title': 'Wie ein Sprachmodell schreibt',
+  'head.lead':
+    'Probier Prompts, Rollen, Zufall und «Nachdenken» an einem kleinen Sprachmodell aus, das ganz in deinem Browser läuft. Was du eintippst, verlässt deinen Computer nicht.',
+  'head.by': 'von Philipp Haslbauer',
+
+  'start.h': 'Modell starten',
+  'start.p1':
+    'Ein Sprachmodell ist ein Programm, das Text fortsetzt. Es hat riesige Mengen an Text gelesen und dabei gelernt, welches Wort wahrscheinlich als Nächstes kommt. Mehr macht es nicht, und doch reicht das, um zu schreiben, zusammenzufassen und Fragen zu beantworten.',
+  'start.p2':
+    'Das Modell auf dieser Seite ist winzig im Vergleich zu ChatGPT oder Claude, und es läuft auf deinem eigenen Laptop. Weil es klein ist, macht es Fehler. Das ist hier praktisch: So sieht man, wie es funktioniert.',
+  'start.small': 'Klein',
+  'start.smallNote': 'Qwen3 0.6B · ≈ 0,5 GB · schnell, läuft auf den meisten Laptops',
+  'start.better': 'Besser',
+  'start.betterNote': 'Qwen3 1.7B · ≈ 1,2 GB · klüger, langsamer, braucht einen stärkeren Laptop',
+  'start.load': 'Modell laden',
+  'start.switch': 'Modell wechseln',
+  'start.note': 'Der erste Download dauert ein paar Minuten. Danach ist das Modell im Browser gespeichert.',
+  'gpu.checking': 'Browser wird geprüft…',
+  'gpu.ok': 'Dein Browser kann das Modell ausführen.',
+  'gpu.none':
+    'Dein Browser kann das Modell nicht ausführen (WebGPU fehlt). Öffne die Seite bitte in Chrome oder Edge auf einem Laptop. Lesen kannst du trotzdem alles.',
+  'load.loading': 'Wird geladen…',
+  'load.ready': 'Modell bereit: {name}. Scroll nach unten und probier es aus.',
+  'err.no-webgpu': 'Dieser Browser hat kein WebGPU. Bitte Chrome oder Edge verwenden.',
+  'err.no-adapter': 'Kein nutzbarer Grafikchip gefunden. Versuch es mit Chrome oder Edge oder einem anderen Computer.',
+  'err.memory': 'Zu wenig Grafikspeicher. Schliess andere Tabs oder wähle das kleine Modell.',
+  'err.download': 'Laden fehlgeschlagen: {msg}. Prüfe die Internetverbindung und versuch es nochmals.',
+
+  'box.run': 'Los',
+  'box.stop': 'Stopp',
+  'box.think': 'Zuerst nachdenken',
+  'box.thinkHint': 'Das Modell schreibt sich vor der Antwort Notizen.',
+  'box.prompt': 'Prompt',
+  'box.output': 'Antwort',
+  'box.needModel': 'Zuerst das Modell laden (oben auf der Seite).',
+  'box.busy': 'Warte, bis die aktuelle Antwort fertig ist.',
+  'out.thinking': 'Denkt nach…',
+  'out.thoughtFor': '{s} s nachgedacht',
+  'out.thoughts': 'Gedanken',
+  'out.writing': 'Schreibt…',
+  'out.stats': '{n} Tokens · {s} s',
+  'out.capped': 'Abgebrochen: Die Längengrenze wurde erreicht.',
+  'out.cappedThinking': 'Abgebrochen, während das Modell noch nachdachte. Die Grenze war vor der Antwort erreicht.',
+  'out.stopped': 'Gestoppt.',
+  'out.error': 'Etwas ist schiefgelaufen: {msg}',
+
+  'prompt.h': 'Der Prompt',
+  'prompt.p1':
+    'Was du dem Modell schreibst, heisst <em>Prompt</em>. Das Modell weiss nicht, was du dir vorstellst; es hat nur deine Worte. Ein vager Prompt bekommt eine beliebige Antwort.',
+  'prompt.p2': 'Schreib ihn wie ein Briefing für jemanden im Team: Für wen ist es, welcher Ton, wie lang, welches Format?',
+  'prompt.try': 'Lass beide laufen und vergleiche. Ändere dann den genauen Prompt: anderer Laden, anderer Ton.',
+  'prompt.vagueLabel': 'Vage',
+  'prompt.specificLabel': 'Genau',
+  'p.vague': 'Schreib einen Slogan.',
+  'p.specific':
+    'Schreib 3 Slogans für eine kleine Bäckerei in Luzern, die Sauerteigbrot verkauft. Ton: herzlich und ein bisschen witzig. Höchstens 6 Wörter pro Slogan.',
+
+  'role.h': 'Dem Modell eine Rolle geben',
+  'role.p1':
+    'Neben dem Prompt kannst du dauerhafte Anweisungen geben: wer das Modell sein soll und wie es schreiben soll. Das nennt man <em>System-Prompt</em>. Apps wie ChatGPT verwenden einen, den du nie siehst.',
+  'role.try': 'Behalte die Aufgabe, wechsle die Rolle, lass es nochmals laufen.',
+  'role.roleLabel': 'Rolle (System-Prompt)',
+  'role.taskLabel': 'Aufgabe (Prompt)',
+  'role.pick.copywriter': 'Werbetexterin',
+  'role.pick.kids': 'Kinderbuchautor',
+  'role.pick.critic': 'Mürrische Kunstkritikerin',
+  'role.pick.own': 'Eigene Rolle…',
+  'role.task': 'Beschreibe einen verregneten Montagmorgen in 3 Sätzen.',
+  'role.copywriter': 'Du bist Werbetexterin. Du schreibst kurz, knackig und überzeugend.',
+  'role.kids': 'Du bist Kinderbuchautor. Du schreibst für 5-Jährige: einfache Wörter, viele Geräusche und Farben.',
+  'role.critic': 'Du bist eine mürrische Kunstkritikerin. Nichts beeindruckt dich.',
+  'role.own': 'Du bist …',
+
+  'fewshot.h': 'Zeigen statt beschreiben',
+  'fewshot.p1':
+    'Manchmal ist es einfacher zu zeigen, was man will, als es zu beschreiben. Gib dem Modell zwei, drei Beispiele, und es setzt das Muster fort: Länge, Rhythmus, Stil. Das nennt man <em>Few-Shot-Prompting</em>.',
+  'fewshot.try': 'Schreib die zwei Beispiele in einem ganz anderen Stil um und lass es nochmals laufen.',
+  'fewshot.prompt':
+    'Mach aus einem Produkt einen poetischen Slogan.\n\nProdukt: Regenschirm\nSlogan: Ein kleines Dach, das mit dir geht.\n\nProdukt: Bleistift\nSlogan: Gedanken, die im Graphit warten.\n\nProdukt: Kaffeetasse\nSlogan:',
+
+  'rand.h': 'Zufall',
+  'rand.p1':
+    'Das Modell hat nicht das eine nächste Wort. Es hat eine Liste wahrscheinlicher Kandidaten und zieht einen davon, wie mit einem gezinkten Würfel. Die <em>Temperatur</em> bestimmt, wie mutig gezogen wird: niedrig ergibt sicheren, eintönigen Text, hoch ergibt Überraschungen und manchmal Unsinn.',
+  'rand.try': 'Erzeuge drei Antworten bei niedriger Temperatur, dann bei hoher.',
+  'rand.temp': 'Temperatur',
+  'rand.low': 'vorhersehbar',
+  'rand.high': 'wild',
+  'rand.run': '3× erzeugen',
+  'rand.prompt': 'Erfinde einen Namen für eine neue Farbe zwischen Blau und Grün. Antworte nur mit dem Namen.',
+
+  'tokens.h': 'Ein Wort nach dem anderen',
+  'tokens.p1':
+    'Hier schaust du dem Modell über die Schulter. Es entscheidet immer nur das nächste kleine Textstück, ein sogenanntes <em>Token</em>: ein Wort oder ein Teil davon. Unten siehst du seine fünf liebsten Kandidaten und wie wahrscheinlich es jeden findet.',
+  'tokens.try': 'Klick auf einen Kandidaten, um ihn zu wählen, oder lass das Modell ziehen. Du kannst den Text auch bearbeiten.',
+  'tokens.show': 'Nächste Wörter zeigen',
+  'tokens.auto': 'Modell wählen lassen',
+  'tokens.reset': 'Neu anfangen',
+  'tokens.legend': '␣ = beginnt mit Leerzeichen · ↵ = neue Zeile',
+  'tokens.start': 'Es war einmal, in einem kleinen Atelier voller Papier, eine Illustratorin, die',
+
+  'reason.h': 'Nachdenken vor dem Antworten',
+  'reason.p1':
+    'Neuere Modelle können zuerst «nachdenken». Vor der Antwort schreiben sie sich Notizen: Ideen ausprobieren, prüfen, korrigieren. Diese Notizen sind gewöhnlicher Text, genau gleich erzeugt wie alles andere, Token für Token. Die Antwort danach kann aber darauf aufbauen.',
+  'reason.p2':
+    'Nachdenken dauert länger und hilft vor allem bei Rätseln, Zahlen und Planung, viel weniger bei Geschmacksfragen. Jede Box auf dieser Seite hat einen Schalter «Zuerst nachdenken». Probier ihn auch bei den Slogans.',
+  'reason.try': 'Stell dieselbe Frage zweimal: einmal direkt, einmal mit Nachdenken. Öffne dann die Gedanken und lies, wie das Modell auf die Antwort kommt.',
+  'reason.run': 'Beide fragen',
+  'reason.direct': 'Direkt antworten',
+  'reason.think': 'Zuerst nachdenken',
+  'reason.q':
+    'Ein Bleistift und ein Radiergummi kosten zusammen 1.10 Franken. Der Bleistift kostet 1.00 Franken mehr als der Radiergummi. Wie viel kostet der Radiergummi?',
+
+  'fail.h': 'Wo es schiefgeht',
+  'fail.p1':
+    'Sprachmodelle klingen selbstsicher, auch wenn sie falsch liegen. Sie schlagen nichts nach; sie erzeugen Text, der wahrscheinlich klingt. Probier diese aus, mit und ohne Nachdenken.',
+  'fail.countH': 'Buchstaben zählen',
+  'fail.countNote': 'Das Modell sieht keine Buchstaben, nur Tokens. Zeichen zählen fällt ihm erstaunlich schwer.',
+  'fail.count': 'Wie oft kommt der Buchstabe r im Wort Erdbeerrahm vor?',
+  'fail.bioH': 'Eine Person, die es nicht gibt',
+  'fail.bioNote': 'Severin Quaderer haben wir erfunden. Gibt das Modell das zu, oder erfindet es ein Leben?',
+  'fail.bio': 'Schreib eine kurze Biografie des Schweizer Illustrators Severin Quaderer (1921–1987).',
+  'fail.sourcesH': 'Quellen',
+  'fail.sourcesNote': 'Erfundene Quellen mit echt klingenden Autorinnen und Autoren sind häufig. Übernimm nie eine Quelle von einem Modell, ohne sie zu prüfen.',
+  'fail.sources': 'Nenn mir zwei wissenschaftliche Quellen (Autor, Jahr, Titel) dazu, wie Kinder Farben wahrnehmen.',
+  'fail.dateH': 'Das heutige Datum',
+  'fail.dateNote': 'Das Modell hat keine Uhr und kein Internet. Es kennt nur den Text, mit dem es trainiert wurde.',
+  'fail.date': 'Welches Datum ist heute?',
+
+  'end.h': 'Zum Mitnehmen',
+  'end.1': 'Ein Prompt ist ein Briefing. Sag, für wen es ist, welcher Ton, welche Länge, welches Format.',
+  'end.2': 'Rollen und Beispiele steuern den Stil besser als aneinandergereihte Adjektive.',
+  'end.3': 'Zufall ist nützlich: Lass mehrere Versionen erzeugen und wähle aus.',
+  'end.4': 'Nachdenken hilft bei Logik. Geschmack gibt es dem Modell nicht.',
+  'end.5': 'Prüfe jede Tatsache, jeden Namen und jede Quelle.',
+  'foot':
+    'Läuft mit <a href="https://github.com/mlc-ai/web-llm">WebLLM</a> und <a href="https://huggingface.co/Qwen">Qwen3</a> (Apache 2.0). Gemacht von <a href="https://philipphaslbauer.com">Philipp Haslbauer</a>.',
+};
