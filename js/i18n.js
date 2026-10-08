@@ -34,6 +34,14 @@ export function tf(key, values) {
   return t(key).replace(/\{(\w+)\}/g, (_, name) => values[name] ?? '');
 }
 
+/** Set a translatable label that follows language switches (optionally with {vars}). */
+export function label(el, key, vars) {
+  el.dataset.i18n = key;
+  if (vars) el.dataset.i18nVars = JSON.stringify(vars);
+  else delete el.dataset.i18nVars;
+  el.textContent = vars ? tf(key, vars) : t(key);
+}
+
 export function onLangChange(fn) {
   listeners.push(fn);
 }
@@ -44,7 +52,7 @@ export function onLangChange(fn) {
  */
 export function applyStatic(root = document) {
   root.querySelectorAll('[data-i18n]').forEach((el) => {
-    el.textContent = t(el.dataset.i18n);
+    el.textContent = el.dataset.i18nVars ? tf(el.dataset.i18n, JSON.parse(el.dataset.i18nVars)) : t(el.dataset.i18n);
   });
   root.querySelectorAll('[data-i18n-html]').forEach((el) => {
     el.innerHTML = t(el.dataset.i18nHtml);
