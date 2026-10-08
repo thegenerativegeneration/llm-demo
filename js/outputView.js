@@ -1,10 +1,23 @@
 import { splitThinking } from './thinking.js';
 import { label } from './i18n.js';
+import { parseBold } from './markdown.js';
 
 function el(tag, className) {
   const node = document.createElement(tag);
   if (className) node.className = className;
   return node;
+}
+
+/** Answer text with **bold** rendered as <strong>, built from text nodes only. */
+export function renderBold(target, text) {
+  target.replaceChildren(
+    ...parseBold(text).map((p) => {
+      if (!p.bold) return document.createTextNode(p.text);
+      const strong = document.createElement('strong');
+      strong.textContent = p.text;
+      return strong;
+    }),
+  );
 }
 
 const secs = (ms) => (ms / 1000).toFixed(ms < 10000 ? 1 : 0);
@@ -49,7 +62,7 @@ export function createOutputView(container, { thinking }) {
         thoughtText.textContent = last.thoughts;
       }
     }
-    answer.textContent = last.answer;
+    renderBold(answer, last.answer);
     answer.classList.toggle('pulse', !(thinking && open));
   }
 
