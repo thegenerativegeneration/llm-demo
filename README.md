@@ -26,9 +26,9 @@ Slides have URLs (`#0` … `#11`), and ← → switch slides.
 
 ## Requirements
 
-- A browser with WebGPU: current Chrome or Edge on a laptop or desktop.
+- A browser with WebGPU: current Chrome, Edge or Safari (macOS 26) on a laptop or desktop.
 - Firefox does not work yet: its WebGPU offers 9 storage buffers per shader stage, WebLLM needs 10.
-  The page detects this and asks for Chrome or Edge.
+  The page detects this and asks for Chrome, Edge or Safari.
 - Download on first use: Qwen3 0.6B ≈ 0.5 GB, Qwen3 1.7B ≈ 1.2 GB. The browser caches the
   model afterwards. The 1.7B model writes much better German.
 - GPUs without `shader-f16` automatically get the f32 build, which needs more memory.
