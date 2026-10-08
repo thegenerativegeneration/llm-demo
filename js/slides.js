@@ -9,6 +9,7 @@ export function initSlides() {
   const prev = document.getElementById('prev');
   const next = document.getElementById('next');
   const dotsEl = document.getElementById('dots');
+  const counter = document.getElementById('counter');
   let current = -1;
 
   const dots = slides.map((_, i) => {
@@ -28,6 +29,7 @@ export function initSlides() {
     current = n;
     slides.forEach((s, i) => (s.hidden = i !== n));
     dots.forEach((b, i) => b.setAttribute('aria-current', i === n ? 'step' : 'false'));
+    counter.textContent = `${n} / ${count - 1}`;
     prev.disabled = n === 0;
     next.disabled = n === count - 1;
     window.scrollTo(0, 0);
