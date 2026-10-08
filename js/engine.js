@@ -25,6 +25,23 @@ export async function load(nextSize, onProgress) {
 export const isReady = () => engine !== null && size !== null;
 export const currentSize = () => size;
 
+async function collect(chunks, pick, onText) {
+  let text = '';
+  let finishReason = null;
+  let tokens = 0;
+  for await (const chunk of chunks) {
+    const choice = chunk.choices[0];
+    const piece = choice ? pick(choice) : '';
+    if (piece) {
+      text += piece;
+      onText(text);
+    }
+    if (choice?.finish_reason) finishReason = choice.finish_reason;
+    if (chunk.usage) tokens = chunk.usage.completion_tokens;
+  }
+  return { text, finishReason, tokens };
+}
+
 /**
  * Stream a chat completion. `onText` receives the full raw text so far
  * (including <think> blocks); split it with splitThinking().
@@ -38,19 +55,19 @@ export async function stream({ messages, temperature = 0.7, thinking = false, ma
     max_tokens: maxTokens ?? (thinking ? 1200 : 300),
     extra_body: { enable_thinking: thinking },
   });
-  let text = '';
-  let finishReason = null;
-  let tokens = 0;
-  for await (const chunk of chunks) {
-    const choice = chunk.choices[0];
-    if (choice?.delta?.content) {
-      text += choice.delta.content;
-      onText(text);
-    }
-    if (choice?.finish_reason) finishReason = choice.finish_reason;
-    if (chunk.usage) tokens = chunk.usage.completion_tokens;
-  }
-  return { text, finishReason, tokens };
+  return collect(chunks, (c) => c.delta?.content, onText);
+}
+
+/** Stream a plain continuation of `prompt` (no chat template). */
+export async function streamCompletion({ prompt, temperature = 0.7, maxTokens = 60 }, onText) {
+  const chunks = await engine.completions.create({
+    prompt,
+    temperature,
+    stream: true,
+    stream_options: { include_usage: true },
+    max_tokens: maxTokens,
+  });
+  return collect(chunks, (c) => c.text, onText);
 }
 
 /** The k most likely next tokens after `prompt` (plain text, no chat template). */

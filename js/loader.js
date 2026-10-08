@@ -2,7 +2,7 @@ import { label, onLangChange } from './i18n.js';
 import * as engine from './engine.js';
 import { detectGpu, MODELS } from './models.js';
 import { runLock, setModelReady } from './state.js';
-import { el } from './tryBox.js';
+import { el } from './ui.js';
 
 const STORAGE_KEY = 'llm-basics-model';
 
@@ -35,6 +35,12 @@ function modelOption(size, checked) {
   text.append(name, note);
   opt.append(input, text);
   return { opt, input };
+}
+
+const pill = () => document.getElementById('model-pill');
+function setPill(state, key, vars) {
+  pill().dataset.state = state;
+  label(pill(), key, vars);
 }
 
 export async function mountLoader(mount) {
@@ -79,6 +85,7 @@ export async function mountLoader(mount) {
     progress.value = fraction;
     label(status, 'load.loading');
     status.textContent += ` ${lastPct} %`;
+    setPill('loading', 'pill.loading');
   };
   // the percentage is appended by hand, so re-append it after a language switch
   onLangChange(() => {
@@ -104,6 +111,7 @@ export async function mountLoader(mount) {
       progress.hidden = true;
       label(status, 'load.ready', { name: `Qwen3 ${MODELS[size].base.split('-')[1]}` });
       label(loadBtn, 'start.switch');
+      setPill('ready', 'pill.ready', { name: `Qwen3 ${MODELS[size].base.split('-')[1]}` });
       setModelReady(true);
     } catch (error) {
       progress.hidden = true;
@@ -112,6 +120,7 @@ export async function mountLoader(mount) {
       label(status, key, vars);
       // a failed switch leaves no usable model
       setModelReady(engine.isReady());
+      if (!engine.isReady()) setPill('none', 'pill.none');
     } finally {
       loading = false;
       runLock.release();

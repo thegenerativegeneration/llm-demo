@@ -9,29 +9,64 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="masthead">
-      <div class="masthead-bar">
-        <a class="byline" href="https://philipphaslbauer.com" data-i18n="head.by">by Philipp Haslbauer</a>
-        <div class="lang" role="group" aria-label="Language / Sprache">
-          <button type="button" data-lang="de">DE</button>
-          <button type="button" data-lang="en">EN</button>
-        </div>
+    <header class="topbar">
+      <a class="topbar-title" href="#0" data-i18n="head.title">How a language model writes</a>
+      <a class="pill" id="model-pill" href="#0" data-i18n="pill.none"></a>
+      <div class="lang" role="group" aria-label="Language / Sprache">
+        <button type="button" data-lang="de">DE</button>
+        <button type="button" data-lang="en">EN</button>
       </div>
-      <p class="kicker" data-i18n="head.kicker"></p>
-      <h1 data-i18n="head.title">How a language model writes</h1>
-      <p class="lead" data-i18n="head.lead"></p>
     </header>
 
-    <main>
-      <section class="step" id="start">
+    <main id="slides">
+      <!-- 0 · start -->
+      <section class="slide" data-slide="0" aria-labelledby="h0">
+        <p class="kicker" data-i18n="head.kicker"></p>
+        <h1 id="h0" tabindex="-1" data-i18n="head.title"></h1>
+        <p class="lead" data-i18n="head.lead"></p>
         <h2><span class="num">0</span><span data-i18n="start.h"></span></h2>
         <p data-i18n="start.p1"></p>
         <p data-i18n="start.p2"></p>
         <div id="loader"></div>
+        <p class="hint" data-i18n="start.recommend"></p>
       </section>
 
-      <section class="step" id="prompt">
-        <h2><span class="num">1</span><span data-i18n="prompt.h"></span></h2>
+      <!-- 1 · continue text -->
+      <section class="slide" data-slide="1" aria-labelledby="h1" hidden>
+        <h2 id="h1" tabindex="-1"><span class="num">1</span><span data-i18n="cont.h"></span></h2>
+        <p data-i18n="cont.p1"></p>
+        <p data-i18n="cont.p2"></p>
+        <p class="try" data-i18n="cont.try"></p>
+        <div id="continue-box"></div>
+      </section>
+
+      <!-- 2 · next word -->
+      <section class="slide" data-slide="2" aria-labelledby="h2" hidden>
+        <h2 id="h2" tabindex="-1"><span class="num">2</span><span data-i18n="tokens.h"></span></h2>
+        <p data-i18n-html="tokens.p1"></p>
+        <p class="try" data-i18n="tokens.try"></p>
+        <div id="tokens-box"></div>
+      </section>
+
+      <!-- 3 · randomness -->
+      <section class="slide" data-slide="3" aria-labelledby="h3" hidden>
+        <h2 id="h3" tabindex="-1"><span class="num">3</span><span data-i18n="rand.h"></span></h2>
+        <p data-i18n-html="rand.p1"></p>
+        <p class="try" data-i18n="rand.try"></p>
+        <div id="rand-box"></div>
+      </section>
+
+      <!-- 4 · ask -->
+      <section class="slide" data-slide="4" aria-labelledby="h4" hidden>
+        <h2 id="h4" tabindex="-1"><span class="num">4</span><span data-i18n="ask.h"></span></h2>
+        <p data-i18n="ask.p1"></p>
+        <p class="try" data-i18n="ask.try"></p>
+        <div data-box="ask"></div>
+      </section>
+
+      <!-- 5 · be specific -->
+      <section class="slide" data-slide="5" aria-labelledby="h5" hidden>
+        <h2 id="h5" tabindex="-1"><span class="num">5</span><span data-i18n="prompt.h"></span></h2>
         <p data-i18n-html="prompt.p1"></p>
         <p data-i18n="prompt.p2"></p>
         <p class="try" data-i18n="prompt.try"></p>
@@ -41,69 +76,51 @@
         </div>
       </section>
 
-      <section class="step" id="role">
-        <h2><span class="num">2</span><span data-i18n="role.h"></span></h2>
+      <!-- 6 · chat -->
+      <section class="slide" data-slide="6" aria-labelledby="h6" hidden>
+        <h2 id="h6" tabindex="-1"><span class="num">6</span><span data-i18n="chat.h"></span></h2>
+        <p data-i18n="chat.p1"></p>
+        <p class="try" data-i18n="chat.try"></p>
+        <div data-box="chat"></div>
+      </section>
+
+      <!-- 7 · role -->
+      <section class="slide" data-slide="7" aria-labelledby="h7" hidden>
+        <h2 id="h7" tabindex="-1"><span class="num">7</span><span data-i18n="role.h"></span></h2>
         <p data-i18n-html="role.p1"></p>
         <p class="try" data-i18n="role.try"></p>
         <div data-box="role"></div>
       </section>
 
-      <section class="step" id="fewshot">
-        <h2><span class="num">3</span><span data-i18n="fewshot.h"></span></h2>
+      <!-- 8 · examples -->
+      <section class="slide" data-slide="8" aria-labelledby="h8" hidden>
+        <h2 id="h8" tabindex="-1"><span class="num">8</span><span data-i18n="fewshot.h"></span></h2>
         <p data-i18n-html="fewshot.p1"></p>
         <p class="try" data-i18n="fewshot.try"></p>
         <div data-box="fewshot"></div>
       </section>
 
-      <section class="step" id="randomness">
-        <h2><span class="num">4</span><span data-i18n="rand.h"></span></h2>
-        <p data-i18n-html="rand.p1"></p>
-        <p class="try" data-i18n="rand.try"></p>
-        <div id="rand-box"></div>
-      </section>
-
-      <section class="step" id="tokens">
-        <h2><span class="num">5</span><span data-i18n="tokens.h"></span></h2>
-        <p data-i18n-html="tokens.p1"></p>
-        <p class="try" data-i18n="tokens.try"></p>
-        <div id="tokens-box"></div>
-      </section>
-
-      <section class="step" id="reasoning">
-        <h2><span class="num">6</span><span data-i18n="reason.h"></span></h2>
+      <!-- 9 · thinking -->
+      <section class="slide" data-slide="9" aria-labelledby="h9" hidden>
+        <h2 id="h9" tabindex="-1"><span class="num">9</span><span data-i18n="reason.h"></span></h2>
         <p data-i18n="reason.p1"></p>
         <p data-i18n="reason.p2"></p>
+        <p class="note" data-i18n="reason.p3"></p>
         <p class="try" data-i18n="reason.try"></p>
         <div id="reason-box"></div>
       </section>
 
-      <section class="step" id="failures">
-        <h2><span class="num">7</span><span data-i18n="fail.h"></span></h2>
+      <!-- 10 · failures / playground -->
+      <section class="slide" data-slide="10" aria-labelledby="h10" hidden>
+        <h2 id="h10" tabindex="-1"><span class="num">10</span><span data-i18n="fail.h"></span></h2>
         <p data-i18n="fail.p1"></p>
-        <article class="fail">
-          <h3 data-i18n="fail.countH"></h3>
-          <p class="note" data-i18n="fail.countNote"></p>
-          <div data-box="fail.count"></div>
-        </article>
-        <article class="fail">
-          <h3 data-i18n="fail.bioH"></h3>
-          <p class="note" data-i18n="fail.bioNote"></p>
-          <div data-box="fail.bio"></div>
-        </article>
-        <article class="fail">
-          <h3 data-i18n="fail.sourcesH"></h3>
-          <p class="note" data-i18n="fail.sourcesNote"></p>
-          <div data-box="fail.sources"></div>
-        </article>
-        <article class="fail">
-          <h3 data-i18n="fail.dateH"></h3>
-          <p class="note" data-i18n="fail.dateNote"></p>
-          <div data-box="fail.date"></div>
-        </article>
+        <p data-i18n="play.p2"></p>
+        <div data-box="playground"></div>
       </section>
 
-      <section class="step takeaways" id="end">
-        <h2 data-i18n="end.h"></h2>
+      <!-- 11 · takeaways -->
+      <section class="slide takeaways" data-slide="11" aria-labelledby="h11" hidden>
+        <h2 id="h11" tabindex="-1" data-i18n="end.h"></h2>
         <ol>
           <li data-i18n="end.1"></li>
           <li data-i18n="end.2"></li>
@@ -111,10 +128,15 @@
           <li data-i18n="end.4"></li>
           <li data-i18n="end.5"></li>
         </ol>
+        <footer data-i18n-html="foot"></footer>
       </section>
     </main>
 
-    <footer data-i18n-html="foot"></footer>
+    <nav class="slidenav" aria-label="Slides">
+      <button type="button" class="btn secondary" id="prev" data-i18n="nav.back">Back</button>
+      <div class="dots" id="dots"></div>
+      <button type="button" class="btn" id="next" data-i18n="nav.next">Next</button>
+    </nav>
 
     <noscript><p class="noscript">This page needs JavaScript. / Diese Seite braucht JavaScript.</p></noscript>
     <script type="module" src="js/main.js"></script>
