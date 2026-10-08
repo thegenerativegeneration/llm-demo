@@ -17,5 +17,19 @@ export async function detectGpu(nav) {
     // treated the same as "no adapter"
   }
   if (!adapter) return { ok: false, hasF16: false, reason: 'no-adapter' };
+  if (!meetsWebLLMLimits(adapter.limits)) return { ok: false, hasF16: false, reason: 'limits' };
   return { ok: true, hasF16: adapter.features.has('shader-f16') };
+}
+
+/**
+ * The minimums WebLLM 0.2.85 checks in detectGPUDevice(); e.g. Firefox offers
+ * only 9 storage buffers per shader stage where WebLLM needs 10.
+ */
+function meetsWebLLMLimits(limits) {
+  return (
+    limits.maxStorageBuffersPerShaderStage >= 10 &&
+    limits.maxComputeWorkgroupStorageSize >= 32 << 10 &&
+    limits.maxBufferSize >= 1 << 28 &&
+    limits.maxStorageBufferBindingSize >= 1 << 27
+  );
 }

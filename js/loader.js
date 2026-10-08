@@ -20,6 +20,7 @@ function errorMessage(error) {
   const msg = String(error.message || error);
   if (/memory|OOM|allocation|device lost/i.test(msg)) return { key: 'err.memory' };
   if (/shader-f16/i.test(msg)) return { key: 'err.no-adapter' };
+  if (/exceeds limit/i.test(msg)) return { key: 'err.limits' };
   return { key: 'err.download', vars: { msg } };
 }
 
@@ -82,7 +83,7 @@ export async function mountLoader(mount) {
     label(loadBtn, 'start.load');
     refresh();
   });
-  label(gpuLine, gpu.ok ? 'gpu.ok' : 'gpu.none');
+  label(gpuLine, gpu.ok ? 'gpu.ok' : gpu.reason === 'limits' ? 'gpu.limits' : 'gpu.none');
   gpuLine.classList.toggle('bad', !gpu.ok);
   refresh();
 

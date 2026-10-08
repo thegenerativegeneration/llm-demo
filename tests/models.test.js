@@ -19,6 +19,33 @@ test('requestAdapter throws', async () => {
   assert.deepEqual(await detectGpu({ gpu: { requestAdapter: async () => { throw new Error('x'); } } }), { ok: false, hasF16: false, reason: 'no-adapter' });
 });
 test('adapter with f16', async () => {
-  const nav = { gpu: { requestAdapter: async () => ({ features: new Set(['shader-f16']) }) } };
+  const nav = { gpu: { requestAdapter: async () => ({ features: new Set(['shader-f16']), limits: limits() }) } };
   assert.deepEqual(await detectGpu(nav), { ok: true, hasF16: true });
+});
+
+const limits = (over = {}) => ({
+  maxStorageBuffersPerShaderStage: 10,
+  maxComputeWorkgroupStorageSize: 32768,
+  maxBufferSize: 1 << 30,
+  maxStorageBufferBindingSize: 1 << 30,
+  ...over,
+});
+const navWith = (l, f16 = true) => ({
+  gpu: { requestAdapter: async () => ({ features: new Set(f16 ? ['shader-f16'] : []), limits: l }) },
+});
+
+test('too few storage buffers (Firefox) → limits', async () => {
+  assert.deepEqual(await detectGpu(navWith(limits({ maxStorageBuffersPerShaderStage: 9 }))), { ok: false, hasF16: false, reason: 'limits' });
+});
+test('too little workgroup storage → limits', async () => {
+  assert.deepEqual(await detectGpu(navWith(limits({ maxComputeWorkgroupStorageSize: 16384 }))), { ok: false, hasF16: false, reason: 'limits' });
+});
+test('small but sufficient buffers are fine (WebLLM falls back to 256/128 MB)', async () => {
+  assert.deepEqual(
+    await detectGpu(navWith(limits({ maxBufferSize: 1 << 28, maxStorageBufferBindingSize: 1 << 27 }))),
+    { ok: true, hasF16: true },
+  );
+});
+test('buffers below WebLLM fallback → limits', async () => {
+  assert.deepEqual(await detectGpu(navWith(limits({ maxBufferSize: 1 << 27 }))), { ok: false, hasF16: false, reason: 'limits' });
 });

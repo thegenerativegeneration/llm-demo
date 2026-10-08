@@ -175,4 +175,6 @@ export default {
   'err.context': 'Das Gespräch ist zu lang für das Modell. Drück «Alles vergessen» und fang neu an.',
   'out.thoughtsUnfinished': 'Gedanken (unvollständig)',
   'tokens.broken': 'Nur ein Teil eines Zeichens (z. B. ein halber Umlaut). Allein kann man es nicht wählen.',
+  'gpu.limits': 'Dein Browser hat WebGPU, aber nicht genug davon für dieses Modell (zum Beispiel Firefox). Öffne die Seite bitte in Chrome oder Edge. Lesen kannst du trotzdem alles.',
+  'err.limits': 'Das WebGPU dieses Browsers reicht für das Modell nicht aus. Bitte Chrome oder Edge verwenden.',
 };

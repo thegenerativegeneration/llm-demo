@@ -186,4 +186,6 @@ export default {
   'err.context': 'The conversation is too long for the model. Press “Forget everything” and start again.',
   'out.thoughtsUnfinished': 'Thoughts (unfinished)',
   'tokens.broken': 'Only part of a character (e.g. half an umlaut). It cannot be chosen on its own.',
+  'gpu.limits': 'Your browser has WebGPU, but not enough of it for this model (Firefox, for example). Please open this page in Chrome or Edge. You can still read everything.',
+  'err.limits': 'This browser’s WebGPU is too limited for the model. Please use Chrome or Edge.',
 };
